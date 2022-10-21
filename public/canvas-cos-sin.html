@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<style>
+		* {
+			margin: 0; padding: 0;
+		}
+		body {
+			overflow: hidden;
+		}
+	</style>
+	<title>cos-sin</title>
+</head>
+<body>
+
+<canvas id="mycanvas"></canvas>
+
+<script>
+
+    const myCanvas = document.querySelector('#mycanvas');
+    //畫布寬=視窗寬
+    myCanvas.width = window.innerWidth;
+    //畫布高=視窗高
+    myCanvas.height = window.innerHeight;
+    //軸心從視窗寬高的一半開始定義
+    const cx = myCanvas.width/2;
+    const cy = myCanvas.height/2;
+
+    const fillCircle = function(cx, cy, r, color){
+        const ctx = myCanvas.getContext('2d');
+        ctx.fillStyle = color || 'red';
+        ctx.beginPath();
+        // arc(圓心x, 圓心y, 半徑, 起始角度, 結束角度, 是否為逆時針方向);
+        ctx.arc(cx, cy, r, 0, Math.PI*2);
+        ctx.fill();
+    };
+
+    const ballNum = 18;
+    const angUnit = Math.PI*2 / ballNum;
+    const r = 200;
+
+    for(let i=0; i<ballNum; i++){
+        const x = cx + Math.cos(i*angUnit)*r;
+        const y = cy + Math.sin(i*angUnit)*r;
+        const degree = i*angUnit/Math.PI*180;
+        fillCircle(x, y, 30, `hsl(${degree},100%,50%)`);
+    }
+
+
+</script>
+</body>
+</html>
